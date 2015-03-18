@@ -1,4 +1,4 @@
-package edu.ycp.cs320.groupProject.model;
+package edu.ycp.cs320.groupProject.webapp.shared.model;
 
 public class Point {
 	int x;

@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import edu.ycp.cs320.groupProject.controller.*;
-import edu.ycp.cs320.groupProject.model.Ball;
-import edu.ycp.cs320.groupProject.model.Paddle;
-import edu.ycp.cs320.groupProject.model.Stage;
+import edu.ycp.cs320.groupProject.webapp.shared.controller.*;
+import edu.ycp.cs320.groupProject.webapp.shared.model.Ball;
+import edu.ycp.cs320.groupProject.webapp.shared.model.Paddle;
+import edu.ycp.cs320.groupProject.webapp.shared.model.Stage;
 
 public class StageView extends JPanel {
 	/**

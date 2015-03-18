@@ -6,6 +6,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
+import edu.ycp.cs320.groupProject.webapp.shared.model.Paddle;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -15,6 +17,9 @@ public class GroupProjectWebapp implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		Label label = new Label("Hello, world!");
+		
+		// Demonstrate that model objects can be created
+		Paddle paddle = new Paddle(100, 100, true);
 		
 		// For now, just a hard-coded UI
 		
