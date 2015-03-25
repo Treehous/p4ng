@@ -47,32 +47,48 @@ public class Paddle {
 	 * @return Point value of the nearest on paddle in relation to ball
 	 */
 	public Point findNearest(Ball ball){
-		//X values for offset
-		int xNearest = 0;
-		if((ball.getX() >= topleft.getX() )&& (ball.getX()<=topleft.getX()+width)){
-			if(ball.getDx() > 0){
-				xNearest = ball.getX()+ ball.getRadius();
-			}else{
-				xNearest = ball.getX()- ball.getRadius();
+		int xNearest = 0, yNearest = 0;
+		
+		if (!vertical){
+			//X values for offset
+			if((ball.getX() >= topleft.getX() )&& (ball.getX()<=topleft.getX()+width)){
+				if(ball.getDx() > 0){
+					xNearest = ball.getX();
+				}else{
+					xNearest = ball.getX();
+				}
+			}else if(ball.getX() < topleft.getX() ){
+				xNearest = topleft.getX();
+			}else if(ball.getX() > topleft.getX()+width ){
+				xNearest = topleft.getX()+width;
 			}
-		}else if(ball.getX() < topleft.getX() ){
-			xNearest = topleft.getX();
-		}else if(ball.getX() > topleft.getX()+width ){
-			xNearest = topleft.getX()+width;
-		}
-		//Y values for offset
-		int yNearest = 0;
-		if((ball.getY()>= topleft.getY() )&& (ball.getY()<=topleft.getY()+ length)){
+			//Y values for offset
 			if(ball.getDy() > 0){
-				yNearest = ball.getY()+ ball.getRadius();
+				yNearest = topleft.getY();
 			}else{
-				yNearest = ball.getY()- ball.getRadius();
+				yNearest = topleft.getY()+length;
 			}
-		}else if(ball.getY() < topleft.getY() ){
-			yNearest = topleft.getY();
-		}else if(ball.getY() > topleft.getY()+length ){
-			yNearest = topleft.getY()+length;
+		}else{
+			//Y values for offset
+			if((ball.getY() >= topleft.getY() )&& (ball.getY()<=topleft.getY()+width)){
+				if(ball.getDy() > 0){
+					yNearest = ball.getY();
+				}else{
+					yNearest = ball.getY();
+				}
+			}else if(ball.getY() < topleft.getY() ){
+				yNearest = topleft.getY();
+			}else if(ball.getY() > topleft.getY()+width ){
+				yNearest = topleft.getY()+width;
+			}
+			//X values for offset
+			if(ball.getDx() > 0){
+				xNearest = topleft.getX();
+			}else{
+				xNearest = topleft.getX()+length;
+			}
 		}
+		
 		return new Point(xNearest,yNearest);
 	}
 	
@@ -85,14 +101,25 @@ public class Paddle {
 	 */
 	public void ballCollision(Ball ball){
 		Point near = findNearest(ball);
-		if(near.distanceTo(new Point(ball.getX(),ball.getY())) <= ball.getRadius()*2){
-			if(near.getX()>topleft.getX() && near.getX()< topleft.getX() + width){
-				ball.setDx(-ball.getDx());
+		
+		if(near.distanceTo(new Point(ball.getX(),ball.getY())) <= ball.getRadius()){
+			if(vertical){
+				if(near.getX()>topleft.getX() && near.getX()< topleft.getX() + length){
+					
+					ball.setDy(-ball.getDy());
+				}
+				if(near.getY()>topleft.getY() && near.getY()< topleft.getY() + width){
+					ball.setDx(-ball.getDx());
+				}
+			}else{
+				if(near.getX()>topleft.getX() && near.getX()< topleft.getX() + width){
+					ball.setDy(-ball.getDy());
+				}
+				if(near.getY()>topleft.getY() && near.getY()< topleft.getY() + length){
+					ball.setDx(-ball.getDx());
+				}
 			}
-			if(near.getY()>topleft.getY() && near.getY()< topleft.getY() + length){
-				ball.setDy(-ball.getDy());
-			}
-			//return true;
+
 		}
 		//return false;
 	}
