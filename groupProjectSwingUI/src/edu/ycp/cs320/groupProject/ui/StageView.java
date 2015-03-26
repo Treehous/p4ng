@@ -56,10 +56,11 @@ public class StageView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // paint background
+		Ball ball = model.getBall();
 		
-		g.setColor(Color.DARK_GRAY);
-		for(int i = 0; i < 4;i++){
-			Paddle temp = model.getPaddles().get(i);
+		
+		for(Paddle temp: model.getPaddles()){
+			g.setColor(Color.DARK_GRAY);
 			if (temp.isVertical()){
 				g.fillRect(temp.getTopLeft().getX(), temp.getTopLeft().getY(), 
 						temp.getHeight() , temp.getWidth());
@@ -67,9 +68,12 @@ public class StageView extends JPanel {
 				g.fillRect(temp.getTopLeft().getX(), temp.getTopLeft().getY(), 
 						temp.getWidth(),temp.getHeight() );
 			}
+			g.setColor(Color.BLUE);
+			g.fillOval(temp.findNearest(ball).getX(),temp.findNearest(ball).getY(),6,6);
 		}
+
 		
-		Ball ball = model.getBall();
+		
 		g.fillOval(ball.getX()-ball.getRadius(), ball.getY()-ball.getRadius(), ball.getRadius()*2, ball.getRadius()*2);
 		//g.fillRect((int) square.getX(), (int) square.getY(), (int) square.getWidth(), (int) square.getHeight());
 	}
