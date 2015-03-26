@@ -7,15 +7,19 @@ public class Paddle {
 	int length = 20;
 	boolean vertical = false;
 	int speed = 5;
+	boolean playerControlled;
 	
-	public Paddle(int x, int y, boolean vertical){
+	public Paddle(int x, int y, boolean vertical, boolean playerControlled){
 		topleft = new Point(x,y);
 		this.vertical = vertical;
+		this.playerControlled = playerControlled;
 	}
 	public void setTopLeft(Point point){
 		topleft = point;
 	}public void setSpeed(int speed){
 		this.speed = speed;
+	}public void setPlayerControl(boolean b){
+		playerControlled = b;
 	}
 	public void scalePaddle(int percentageValue){
 		double t = percentageValue/100;
@@ -35,6 +39,8 @@ public class Paddle {
 		return width;
 	}public int getHeight(){
 		return length;
+	}public boolean getPlayerControl(){
+		return playerControlled;
 	}
 	
 	
