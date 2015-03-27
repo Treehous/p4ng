@@ -103,7 +103,6 @@ public class Paddle {
 	 * *also switches velocities of ball if true*
 	 * 
 	 * @param ball 
-	 * @return True if ball collides
 	 */
 	public void ballCollision(Ball ball){
 		Point near = findNearest(ball);

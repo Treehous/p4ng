@@ -35,17 +35,6 @@ public class StageController {
 				
 			}
 		}
-		/*
-		PaddleAI paddle1 = new PaddleAI(model.getPaddles().get(0));
-		PaddleAI paddle2 = new PaddleAI(model.getPaddles().get(1));
-		PaddleAI paddle3 = new PaddleAI(model.getPaddles().get(2));
-		PaddleAI paddle4 = new PaddleAI(model.getPaddles().get(3));
-		
-		paddle1.PaddleControl(model.getBall());
-		paddle2.PaddleControl(model.getBall());
-		paddle3.PaddleControl(model.getBall());
-		paddle4.PaddleControl(model.getBall());
-		*/
 		
 		model.setBall(new Ball((int)(model.getBall().getX() + model.getBall().getDx()), 
 				(int)(model.getBall().getY() + model.getBall().getDy()), model.getBall().getDx(), 

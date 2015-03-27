@@ -7,6 +7,7 @@ public class Stage {
 	public static final int HEIGHT = 600;
 	protected boolean gameOver = false;
 	
+	ArrayList<User> userList = new ArrayList<User>();
 	ArrayList<Paddle> paddleList = new ArrayList<Paddle>();
 	private Ball ball;
 	
@@ -15,7 +16,10 @@ public class Stage {
 		paddleList.add(1, paddle2);
 		paddleList.add(2, paddle3);
 		paddleList.add(3, paddle4);
+	}public void addUser(User user){
+		userList.add(user);
 	}
+
 	
 	//constructor
 	public Stage(){
