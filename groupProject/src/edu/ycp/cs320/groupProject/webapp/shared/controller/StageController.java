@@ -20,7 +20,7 @@ public class StageController {
 		double xVel = Math.cos(rand);
 		double yVel = Math.sin(rand);
 		
-		//xVel*initVel
+		
 		model.setBall(new Ball(Stage.WIDTH/2, Stage.HEIGHT/2, xVel*initVel, yVel*initVel)  );
 		
 		
@@ -40,5 +40,6 @@ public class StageController {
 				(int)(model.getBall().getY() + model.getBall().getDy()), model.getBall().getDx(), 
 				model.getBall().getDy()));
 		
+
 	}
 }

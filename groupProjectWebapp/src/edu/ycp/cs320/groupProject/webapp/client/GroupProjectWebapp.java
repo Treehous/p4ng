@@ -6,28 +6,31 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
-import edu.ycp.cs320.groupProject.webapp.shared.model.Paddle;
+import edu.ycp.cs320.groupProject.webapp.shared.controller.StageController;
+import edu.ycp.cs320.groupProject.webapp.shared.model.Ball;
+import edu.ycp.cs320.groupProject.webapp.shared.model.Stage;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class GroupProjectWebapp implements EntryPoint {
-	/**
-	 * This is the entry point method.
-	 */
+
 	public void onModuleLoad() {
-		Label label = new Label("Hello, world!");
+	
+		Stage game = new Stage();
 		
-		// Demonstrate that model objects can be created
-		Paddle paddle = new Paddle(100, 100, true);
+		StageController controller = new StageController();
+		controller.initModel(game);
 		
-		// For now, just a hard-coded UI
+		GameView view = new GameView();
+		view.setModel(game);
+		view.setController(controller);
 		
 		FlowPanel panel = new FlowPanel();
-		panel.add(label);
+		
+		panel.setSize("0px", "0px");
 		
 		RootLayoutPanel.get().add(panel);
-		RootLayoutPanel.get().setWidgetLeftRight(panel, 10.0, Unit.PX, 10.0, Unit.PX);
-		RootLayoutPanel.get().setWidgetTopBottom(panel, 10.0, Unit.PX, 10.0, Unit.PX);
+		RootLayoutPanel.get().add(view);
+		
+		view.startAnimation();
+		
 	}
 }

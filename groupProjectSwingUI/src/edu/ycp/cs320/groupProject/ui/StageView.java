@@ -18,11 +18,8 @@ import edu.ycp.cs320.groupProject.webapp.shared.model.Paddle;
 import edu.ycp.cs320.groupProject.webapp.shared.model.Stage;
 
 public class StageView extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5918784966455771417L;
 
+	private static final long serialVersionUID = -5918784966455771417L;
 	
 	private Stage model;
 	private StageController controller;
@@ -58,7 +55,6 @@ public class StageView extends JPanel {
 		super.paintComponent(g); // paint background
 		Ball ball = model.getBall();
 		
-		
 		for(Paddle temp: model.getPaddles()){
 			g.setColor(Color.DARK_GRAY);
 			if (temp.isVertical()){
@@ -71,11 +67,8 @@ public class StageView extends JPanel {
 			g.setColor(Color.BLUE);
 			g.fillOval(temp.findNearest(ball).getX(),temp.findNearest(ball).getY(),6,6);
 		}
-
-		
-		
 		g.fillOval(ball.getX()-ball.getRadius(), ball.getY()-ball.getRadius(), ball.getRadius()*2, ball.getRadius()*2);
-		//g.fillRect((int) square.getX(), (int) square.getY(), (int) square.getWidth(), (int) square.getHeight());
+		
 	}
 	
 	public static void main(String[] args) {
