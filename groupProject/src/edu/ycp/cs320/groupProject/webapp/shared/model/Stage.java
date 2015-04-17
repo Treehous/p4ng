@@ -1,13 +1,17 @@
 package edu.ycp.cs320.groupProject.webapp.shared.model;
 
 import java.util.ArrayList;
+import java.util.logging.*;
 
 public class Stage {
+	//logger troubleshooter
+	Logger logger = Logger.getLogger("SYSTEM");
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 600;
 	protected boolean gameOver = false;
 	
 	ArrayList<User> userList = new ArrayList<User>();
+	User self;
 	ArrayList<Paddle> paddleList = new ArrayList<Paddle>();
 	private Ball ball;
 	
@@ -18,18 +22,58 @@ public class Stage {
 		paddleList.add(3, paddle4);
 	}public void addUser(User user){
 		userList.add(user);
+		user.getController().getControlledPaddle().setPlayerControl(true);
 	}
-
+	
+	public boolean ballOffScreen(){
+		if(ball.getX() > WIDTH || ball.getX() < 0 ){
+			return true;
+		}
+		if(ball.getY() < 0 || ball.getY() > HEIGHT ){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Find who is responsible for ball going out of bounds (Doesn't really matter for AI control)
+	 * @return 0-3, the index of paddle for which the ball went out on.
+	 */
+	public int ballOutOn(){
+		if(ball.getY() > HEIGHT ){
+			return 0;
+		}if(ball.getX() < 0){
+			return 1;
+		}if(ball.getY() < 0 ){
+			return 2;
+		}if(ball.getX() > WIDTH ){
+			return 3;
+		}
+		return -1;
+	}
 	
 	//constructor
 	public Stage(){
 		
-	}
-	public void setBall(Ball ball){
+	}public void setSelf(User e){
+		self = e;
+	}public void setBall(Ball ball){
 		this.ball = ball;
 	}public Ball getBall(){
 		return ball;
 	}public ArrayList<Paddle> getPaddles(){
 		return paddleList;
+	}public ArrayList<User> getUsers(){
+		return userList;
+	}public User getSelf(){
+		return self;
 	}
+	
+	//Troubleshooting logger
+	
+	public Logger getLogger(){
+		return logger;
+	}
+	
+	
 }

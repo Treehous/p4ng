@@ -7,12 +7,25 @@ public class User {
 	PlayerController control;
 	int lives = 3;
 	
-	User(PlayerController control){
+	public User(PlayerController control){
 		this.control = control;
 	}
 	
 	public void setLives(int n){
 		lives = n;
+	}
+	/**
+	 * Lose a life
+	 * @return boolean, true if more lives remain. False if elimination should occur
+	 */
+	public boolean loseALife(){
+		lives -= 1;
+		if(lives <= 0){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 	
 	public PlayerController getController(){

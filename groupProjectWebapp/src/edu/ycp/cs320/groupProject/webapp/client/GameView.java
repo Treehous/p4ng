@@ -3,6 +3,10 @@ package edu.ycp.cs320.groupProject.webapp.client;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.CanvasElement;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
@@ -21,6 +25,7 @@ public class GameView extends Composite {
 	private Context2d bufCtx;
 	private Canvas canvas;
 	private Context2d ctx;
+
 	//private Ball ball;
 	
 	public GameView() {
@@ -38,23 +43,51 @@ public class GameView extends Composite {
 				this.ctx = canvas.getContext2d();
 				panel.add(canvas);
 				
+				canvas.addKeyDownHandler(new KeyDownHandler() {
+					@Override
+					public void onKeyDown(KeyDownEvent event) {
+						handleKeyDown(event);
+					}
+				});
+				canvas.addKeyUpHandler(new KeyUpHandler() {
+					@Override
+					public void onKeyUp(KeyUpEvent event) {
+						handleKeyUp(event);
+					}
+				});
+				
 				initWidget(panel);
 		
 				this.timer = new Timer() {
 					@Override
 					public void run() {
 						if (model != null) {
-							controller.timerTick(model);
-							paint();
+							handleTimerTick();
 						}
 					}
 				};
 	}
 	
 	public void setController(StageController controller) {
-		this.controller = controller;
-		
-		
+		this.controller = controller;	
+	}
+	
+	protected void handleKeyDown(KeyDownEvent event) {
+		if (event.isLeftArrow() || event.isUpArrow()) {
+			model.getSelf().getController().setMovingLeft(true);
+		}
+		if (event.isRightArrow() || event.isDownArrow()) {
+			model.getSelf().getController().setMovingRight(true);
+		}
+	}
+
+	protected void handleKeyUp(KeyUpEvent event) {
+		if (event.isLeftArrow() || event.isUpArrow()) {
+			model.getSelf().getController().setMovingLeft(false);
+		}
+		if (event.isRightArrow() || event.isDownArrow()) {
+			model.getSelf().getController().setMovingRight(false);
+		}
 	}
 	
 	public void startAnimation() {
@@ -62,7 +95,7 @@ public class GameView extends Composite {
 	}
 
 	protected void handleTimerTick() {
-		//controller.timerTick(model);
+		controller.timerTick(model);
 		paint();
 	}
 	
@@ -77,7 +110,11 @@ public class GameView extends Composite {
 		bufCtx.fillRect(0, 0, Stage.WIDTH, Stage.HEIGHT); // paint background		
 		
 		for(Paddle temp: model.getPaddles()){
+			if(temp.equals(model.getSelf().getController().getControlledPaddle())){
+				bufCtx.setFillStyle("red");
+			}else{
 			bufCtx.setFillStyle("gray");
+			}
 			if (temp.isVertical()){
 				bufCtx.fillRect(temp.getTopLeft().getX(), temp.getTopLeft().getY(), 
 						temp.getHeight() , temp.getWidth());
@@ -91,7 +128,10 @@ public class GameView extends Composite {
 		Ball ball = model.getBall();
 		
 			bufCtx.setFillStyle("black");
-			bufCtx.arc(ball.getX(), ball.getY(), 6, 90, 359); 		
+			bufCtx.beginPath();
+			bufCtx.arc(ball.getX(), ball.getY(), ball.getRadius(), 0, 2*Math.PI, false); 		
+			bufCtx.closePath();
+			bufCtx.fill();
 			ctx.drawImage((CanvasElement) buffer.getElement().cast(), 0, 0);
 			
 	}	

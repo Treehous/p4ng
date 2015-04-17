@@ -24,7 +24,7 @@ public class Paddle {
 	public void scalePaddle(int percentageValue){
 		double t = percentageValue/100;
 		width += t*width;
-	}public void restorePaddle(){
+	}public void restorePaddleWidth(){
 		width = 125;
 	}public boolean isVertical(){
 		if(vertical){
