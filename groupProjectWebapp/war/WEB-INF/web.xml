@@ -6,6 +6,16 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+  <servlet>
+    <servlet-name>GameStateServiceImpl</servlet-name>
+    <servlet-class>edu.ycp.cs320.groupProject.webapp.server.GameStateServiceImpl</servlet-class>
+  </servlet>
+  
+  <!-- Servlet mappings -->
+  <servlet-mapping>
+    <servlet-name>GameStateServiceImpl</servlet-name>
+    <url-pattern>/groupprojectwebapp/gameState</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

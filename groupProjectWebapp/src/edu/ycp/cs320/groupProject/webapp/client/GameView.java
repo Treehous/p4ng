@@ -2,12 +2,14 @@ package edu.ycp.cs320.groupProject.webapp.client;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 
@@ -94,7 +96,35 @@ public class GameView extends Composite {
 		timer.scheduleRepeating(1000 / 30);
 	}
 
+	private int tickCount = 0;
+	
 	protected void handleTimerTick() {
+		
+		// See if there is an updated Ball state
+		if (tickCount % 3 == 0) {
+			RPC.gameStateSvc.getUpdatedBall(new AsyncCallback<Ball>() {
+				
+				@Override
+				public void onSuccess(Ball result) {
+					if (result != null) {
+						// Ball was updated
+						model.setBall(result);
+						GWT.log("BallUpdate");
+					} else {
+						// no update
+						GWT.log("No ball status update");
+					}
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					// Error getting updated Ball status
+					GWT.log("Error getting ball status update", caught);
+				}
+			});
+		}
+		tickCount++;
+		
 		controller.timerTick(model);
 		paint();
 	}

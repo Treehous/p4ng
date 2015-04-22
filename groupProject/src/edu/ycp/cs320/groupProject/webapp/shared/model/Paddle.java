@@ -103,8 +103,9 @@ public class Paddle {
 	 * *also switches velocities of ball if true*
 	 * 
 	 * @param ball 
+	 * @return true if collision, false if not
 	 */
-	public void ballCollision(Ball ball){
+	public boolean ballCollision(Ball ball){
 		Point near = findNearest(ball);
 		
 		if(near.distanceTo(new Point(ball.getX(),ball.getY())) <= ball.getRadius()){
@@ -124,8 +125,8 @@ public class Paddle {
 					ball.setDx(-ball.getDx());
 				}
 			}
-
+			return true;
 		}
-		//return false;
+		return false;
 	}
 }

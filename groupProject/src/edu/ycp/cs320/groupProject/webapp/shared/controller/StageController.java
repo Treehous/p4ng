@@ -1,7 +1,7 @@
 package edu.ycp.cs320.groupProject.webapp.shared.controller;
 
 import java.util.Random;
-import java.util.logging.*;
+
 
 import edu.ycp.cs320.groupProject.webapp.shared.model.Ball;
 import edu.ycp.cs320.groupProject.webapp.shared.model.Paddle;
@@ -11,7 +11,6 @@ import edu.ycp.cs320.groupProject.webapp.shared.model.Stage;
 
 public class StageController {
 	public void initModel(Stage model) {
-		model.getLogger().log(Level.INFO, "Is this thing on?");
 		int initVel = 5;
 		Random rnd = new Random();
 		
@@ -70,10 +69,9 @@ public class StageController {
 				if(user.getController().getControlledPaddle().equals(model.getPaddles().get(i))){
 					boolean proceed = user.loseALife();
 					if(proceed){
-						model.getLogger().log(Level.INFO, "Player "+(model.getUsers().indexOf(user)+1)  + " lost a life, " + user.getLives() + " live(s) remain");
+						//GWT.log(Level.INFO, "Player "+(model.getUsers().indexOf(user)+1)  + " lost a life, " + user.getLives() + " live(s) remain");
 					}else{
 						//TODO: Handle elimination
-						model.getLogger().log(Level.INFO, "You should be eliminated...");
 					}
 					
 				}

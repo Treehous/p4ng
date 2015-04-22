@@ -1,11 +1,8 @@
 package edu.ycp.cs320.groupProject.webapp.shared.model;
 
 import java.util.ArrayList;
-import java.util.logging.*;
 
 public class Stage {
-	//logger troubleshooter
-	Logger logger = Logger.getLogger("SYSTEM");
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 600;
 	protected boolean gameOver = false;
@@ -68,12 +65,5 @@ public class Stage {
 	}public User getSelf(){
 		return self;
 	}
-	
-	//Troubleshooting logger
-	
-	public Logger getLogger(){
-		return logger;
-	}
-	
 	
 }

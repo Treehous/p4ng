@@ -1,11 +1,19 @@
 package edu.ycp.cs320.groupProject.webapp.shared.model;
 
-public class Ball {
+import java.io.Serializable;
+
+public class Ball implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	int x;
 	int y;
 	int radius = 13; 
 	double dx;
 	double dy;
+	
+	public Ball() {
+		
+	}
 	
 	public Ball(int x, int y, double dx, double dy){
 		this.x =x;
@@ -32,6 +40,9 @@ public class Ball {
 		this.dx = dx;
 	}public void setDy(double dy){
 		this.dy = dy;
+	}
+	public void setRadius(int radius) {
+		this.radius = radius;
 	}
 
 }
