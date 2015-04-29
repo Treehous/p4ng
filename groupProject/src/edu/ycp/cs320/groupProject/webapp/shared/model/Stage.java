@@ -52,7 +52,9 @@ public class Stage {
 	//constructor
 	public Stage(){
 		
-	}public void setSelf(User e){
+	}
+	
+	public void setSelf(User e){
 		self = e;
 	}public void setBall(Ball ball){
 		this.ball = ball;

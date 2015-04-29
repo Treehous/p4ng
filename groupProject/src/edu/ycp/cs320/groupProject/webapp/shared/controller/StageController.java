@@ -54,10 +54,12 @@ public class StageController {
 				temp.PaddleControl(model.getBall());
 			}
 		}
-		for(User user: model.getUsers()){
-			user.getController().Control(model.getBall());
-		}
+		//REMOVED user for each loop to control users (not sure if needed)
 		
+		boolean collision = model.getSelf().getController().Control(model.getBall());
+		if(collision){
+			
+		}
 		model.setBall(new Ball((int)(model.getBall().getX() + model.getBall().getDx()), 
 				(int)(model.getBall().getY() + model.getBall().getDy()), model.getBall().getDx(), 
 				model.getBall().getDy()));
