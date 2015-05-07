@@ -14,12 +14,14 @@ import javax.swing.Timer;
 
 import edu.ycp.cs320.groupProject.webapp.shared.controller.*;
 import edu.ycp.cs320.groupProject.webapp.shared.model.Ball;
+
 import edu.ycp.cs320.groupProject.webapp.shared.model.Paddle;
 import edu.ycp.cs320.groupProject.webapp.shared.model.Stage;
 
+
 public class StageView extends JPanel {
 
-	private static final long serialVersionUID = -5918784966455771417L;
+	private static final long serialVersionUID = 1L;
 	
 	private Stage model;
 	private StageController controller;
@@ -75,6 +77,9 @@ public class StageView extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				
+				//JFrame logframe = new Login();
+
 				Stage model = new Stage();
 				StageController controller = new StageController();
 				

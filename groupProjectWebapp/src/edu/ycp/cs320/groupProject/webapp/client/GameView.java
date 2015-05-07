@@ -20,15 +20,14 @@ import edu.ycp.cs320.groupProject.webapp.shared.model.Stage;
 
 public class GameView extends Composite {
 	
-	private Stage model;// = new Stage();
+
+	private Stage model;
 	private StageController controller;
 	private Timer timer;
 	private Canvas buffer;
 	private Context2d bufCtx;
 	private Canvas canvas;
 	private Context2d ctx;
-
-	//private Ball ball;
 	
 	public GameView() {
 				FocusPanel panel = new FocusPanel();
@@ -99,10 +98,10 @@ public class GameView extends Composite {
 	private int tickCount = 0;
 	
 	protected void handleTimerTick() {
-		
+		controller.timerTick(model);
 		// See if there is an updated Ball state
-		if (tickCount % 3 == 0) {
-			RPC.gameStateSvc.getUpdatedBall(new AsyncCallback<Ball>() {
+		if (tickCount % 3 == 0 || model.getBall().getCollision()) {
+			RPC.gameStateSvc.getUpdatedBall(model.getBall(), new AsyncCallback<Ball>() {
 				
 				@Override
 				public void onSuccess(Ball result) {
@@ -115,7 +114,7 @@ public class GameView extends Composite {
 						GWT.log("No ball status update");
 					}
 				}
-				
+	
 				@Override
 				public void onFailure(Throwable caught) {
 					// Error getting updated Ball status
@@ -124,8 +123,7 @@ public class GameView extends Composite {
 			});
 		}
 		tickCount++;
-		
-		controller.timerTick(model);
+
 		paint();
 	}
 	

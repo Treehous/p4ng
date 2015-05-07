@@ -1,5 +1,11 @@
 1,Kaz,Turowski
 2,Brett,Harmon
 3,Juan,Deags
+<<<<<<< HEAD
 4,Git ,Hub
 5,Gabe,Newell
+=======
+4,Git,Hub
+5,Gabe,Newell
+6,pass,user
+>>>>>>> refs/remotes/choose_remote_name/master

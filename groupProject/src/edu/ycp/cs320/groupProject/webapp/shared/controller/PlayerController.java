@@ -45,8 +45,10 @@ public class PlayerController{
 		return ownedPaddle;
 	}
 	
-	public boolean Control(Ball targetBall){
+	public void Control(Ball targetBall){
+		
 		boolean collision = ownedPaddle.ballCollision(targetBall);
+		
 		if (moveRight == moveLeft){
 			;//Don't do anything
 		}
@@ -55,7 +57,8 @@ public class PlayerController{
 		}else if (moveLeft){
 			moveLeft();
 		}
-		return collision;
+		targetBall.setCollision(collision);
+
 	}
 	public void moveRight(){
 		if(ownedPaddle.isVertical()){

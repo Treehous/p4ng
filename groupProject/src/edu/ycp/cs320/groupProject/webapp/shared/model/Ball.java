@@ -10,10 +10,15 @@ public class Ball implements Serializable {
 	int radius = 13; 
 	double dx;
 	double dy;
-	
+
 	public Ball() {
 		
 	}
+	
+	
+
+	boolean collision;
+	
 	
 	public Ball(int x, int y, double dx, double dy){
 		this.x =x;
@@ -32,6 +37,8 @@ public class Ball implements Serializable {
 		return dx;
 	}public double getDy(){
 		return dy;
+	}public boolean getCollision(){
+		return collision;
 	}public void setX(int x){
 		this.x = x;
 	}public void setY(int y){
@@ -43,6 +50,9 @@ public class Ball implements Serializable {
 	}
 	public void setRadius(int radius) {
 		this.radius = radius;
+	}public void setCollision(boolean e){
+		collision = e;
+
 	}
 
 }

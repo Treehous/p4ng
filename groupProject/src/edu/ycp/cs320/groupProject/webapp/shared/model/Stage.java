@@ -6,7 +6,7 @@ public class Stage {
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 600;
 	protected boolean gameOver = false;
-	
+
 	ArrayList<User> userList = new ArrayList<User>();
 	User self;
 	ArrayList<Paddle> paddleList = new ArrayList<Paddle>();
@@ -67,5 +67,4 @@ public class Stage {
 	}public User getSelf(){
 		return self;
 	}
-	
 }

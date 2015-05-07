@@ -12,5 +12,7 @@ public interface GameStateService extends RemoteService {
 	 * 
 	 * @return updated Ball, or null if there is no update
 	 */
-	public Ball getUpdatedBall();
+
+	public Ball getUpdatedBall(Ball ball);
+
 }

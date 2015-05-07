@@ -5,42 +5,69 @@ public class Paddle {
 	Point topleft;
 	int width = 125;
 	int length = 20;
+
 	boolean vertical = false;
 	int speed = 5;
 	boolean playerControlled;
+	
+	
+	boolean movingLeft,movingRight;
+
 	
 	public Paddle(int x, int y, boolean vertical, boolean playerControlled){
 		topleft = new Point(x,y);
 		this.vertical = vertical;
 		this.playerControlled = playerControlled;
 	}
+	
 	public void setTopLeft(Point point){
 		topleft = point;
-	}public void setSpeed(int speed){
+	}
+	public void setSpeed(int speed){
 		this.speed = speed;
-	}public void setPlayerControl(boolean b){
+	}
+	public void setPlayerControl(boolean b){
 		playerControlled = b;
+	}
+	public void setMovingRight(boolean e){
+		movingRight = e;
+	}
+	public void setMovingLeft(boolean e){
+		movingLeft = e;
 	}
 	public void scalePaddle(int percentageValue){
 		double t = percentageValue/100;
 		width += t*width;
-	}public void restorePaddleWidth(){
+	}
+	public void restorePaddleWidth(){
 		width = 125;
-	}public boolean isVertical(){
+	}
+	public boolean isVertical(){
 		if(vertical){
 			return true;
 		}
 		return false;
-	}public Point getTopLeft(){
+	}
+	public Point getTopLeft(){
 		return topleft;
-	}public int getSpeed(){
+	}
+	public int getSpeed(){
 		return speed;
-	}public int getWidth(){
+	}
+	public int getWidth(){
 		return width;
-	}public int getHeight(){
+	}
+	public int getHeight(){
 		return length;
-	}public boolean getPlayerControl(){
+	}
+	public boolean getPlayerControl(){
 		return playerControlled;
+	}
+	public boolean getMovingLeft(){
+		return movingLeft;
+	}
+	public boolean getMovingRight(){
+		return movingRight;
 	}
 	
 	
@@ -110,12 +137,13 @@ public class Paddle {
 		
 		if(near.distanceTo(new Point(ball.getX(),ball.getY())) <= ball.getRadius()){
 			if(vertical){
+				if(near.getY()>topleft.getY() && near.getY()< topleft.getY() + width){
+					ball.setDx(-ball.getDx());
+				}
 				if(near.getX()>topleft.getX() && near.getX()< topleft.getX() + length){
 					
 					ball.setDy(-ball.getDy());
-				}
-				if(near.getY()>topleft.getY() && near.getY()< topleft.getY() + width){
-					ball.setDx(-ball.getDx());
+
 				}
 			}else{
 				if(near.getX()>topleft.getX() && near.getX()< topleft.getX() + width){

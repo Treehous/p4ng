@@ -22,6 +22,7 @@ public class StageController {
 		double xVel = Math.cos(rand);
 		double yVel = Math.sin(rand);
 		//create user and make him "you"
+
 		model.addUser(new User(new PlayerController(model.getPaddles().get(0))));
 		model.setSelf(model.getUsers().get(0));
 		
@@ -32,6 +33,16 @@ public class StageController {
 		
 		
 	}
+
+		//model.addUser(new User(new PlayerController(model.getPaddles().get(0))));
+		//model.setSelf(model.getUsers().get(0));
+		
+		//Create dummy to test user case
+		//model.addUser(new User(new PlayerController(model.getPaddles().get(1))));
+		//model.setBall(new Ball(Stage.WIDTH/2, Stage.HEIGHT/2, -4.5, 0.9)  );
+		
+		
+	
 	public void resetStage(Stage model){
 		//Hardcoded paddle reset
 		model.getPaddles().get(0).setTopLeft(new Point(Stage.WIDTH/2, Stage.HEIGHT-30));
@@ -54,15 +65,23 @@ public class StageController {
 				temp.PaddleControl(model.getBall());
 			}
 		}
-		//REMOVED user for each loop to control users (not sure if needed)
 		
-		boolean collision = model.getSelf().getController().Control(model.getBall());
-		if(collision){
-			
-		}
+		
 		model.setBall(new Ball((int)(model.getBall().getX() + model.getBall().getDx()), 
 				(int)(model.getBall().getY() + model.getBall().getDy()), model.getBall().getDx(), 
 				model.getBall().getDy()));
+		
+		//control self
+		//model.getSelf().getController().Control(model.getBall());
+		
+		//read users and their locations (that aren't you)
+		for(User user : model.getUsers()){
+			//collision detection
+			user.getController().getControlledPaddle().ballCollision(model.getBall());
+			
+			//read player's paddle location from database 
+		}
+		
 		
 		if(model.ballOffScreen()){
 			int i = model.ballOutOn();
